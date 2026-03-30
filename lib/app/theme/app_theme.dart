@@ -7,7 +7,7 @@ class AppTheme {
   static ThemeData get lightTheme {
     return ThemeData(
       useMaterial3: true,
-      colorScheme: const ColorScheme.light(
+      colorScheme: const ColorScheme.dark(
         primary: AppColors.primary,
         onPrimary: AppColors.textInverse,
         primaryContainer: AppColors.primaryLight,
@@ -21,24 +21,25 @@ class AppTheme {
         surface: AppColors.surface,
         onSurface: AppColors.textPrimary,
       ),
+      brightness: Brightness.dark,
       scaffoldBackgroundColor: AppColors.background,
-      textTheme: AppTextStyles.textTheme,
+      fontFamily: 'Inter',
       appBarTheme: const AppBarTheme(
-        backgroundColor: AppColors.surface,
-        foregroundColor: AppColors.textPrimary,
+        backgroundColor: AppColors.background,
         elevation: 0,
-        centerTitle: true,
+        centerTitle: false,
         iconTheme: IconThemeData(color: AppColors.textPrimary),
+        titleTextStyle: AppTextStyles.titleLarge,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primary,
           foregroundColor: AppColors.textInverse,
           elevation: 0,
-          textStyle: AppTextStyles.labelLarge,
+          textStyle: AppTextStyles.labelLarge.copyWith(fontWeight: FontWeight.bold),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           shape: RoundedRectangleBorder(
-            borderRadius: AppRadius.borderMd,
+            borderRadius: BorderRadius.circular(AppRadius.borderMd),
           ),
         ),
       ),
@@ -49,39 +50,40 @@ class AppTheme {
           textStyle: AppTextStyles.labelLarge,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           shape: RoundedRectangleBorder(
-            borderRadius: AppRadius.borderMd,
+            borderRadius: BorderRadius.circular(AppRadius.borderMd),
           ),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: AppColors.surface,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
         border: OutlineInputBorder(
-          borderRadius: AppRadius.borderMd,
-          borderSide: const BorderSide(color: AppColors.border),
+          borderRadius: BorderRadius.circular(AppRadius.borderMd),
+          borderSide: BorderSide.none,
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: AppRadius.borderMd,
-          borderSide: const BorderSide(color: AppColors.border),
+          borderRadius: BorderRadius.circular(AppRadius.borderMd),
+          borderSide: BorderSide.none,
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: AppRadius.borderMd,
+          borderRadius: BorderRadius.circular(AppRadius.borderMd),
           borderSide: const BorderSide(color: AppColors.primary, width: 2),
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: AppRadius.borderMd,
+          borderRadius: BorderRadius.circular(AppRadius.borderMd),
           borderSide: const BorderSide(color: AppColors.riskCritical),
         ),
         hintStyle: AppTextStyles.bodyMedium.copyWith(color: AppColors.textHint),
+        labelStyle: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary),
       ),
       cardTheme: CardThemeData(
         color: AppColors.surface,
         elevation: 0,
         margin: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
-          borderRadius: AppRadius.borderLg,
-          side: const BorderSide(color: AppColors.border),
+          borderRadius: BorderRadius.circular(AppRadius.borderLg),
+          side: const BorderSide(color: AppColors.border, width: 1),
         ),
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
@@ -89,7 +91,7 @@ class AppTheme {
         selectedItemColor: AppColors.primary,
         unselectedItemColor: AppColors.textHint,
         type: BottomNavigationBarType.fixed,
-        elevation: 8,
+        elevation: 0,
       ),
       dividerTheme: const DividerThemeData(
         color: AppColors.divider,

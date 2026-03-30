@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hugeicons/hugeicons.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/theme/app_radius.dart';
@@ -79,8 +80,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 // Logo or Icon Placeholder
-                const Icon(
-                  Icons.shield,
+                const HugeIcon(
+                  icon: HugeIcons.strokeRoundedLicense,
                   size: 80,
                   color: AppColors.primary,
                 ),
@@ -91,6 +92,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                         color: AppColors.primary,
                         fontWeight: FontWeight.bold,
+                        letterSpacing: -1,
                       ),
                 ),
                 Text(
@@ -101,88 +103,77 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       ),
                 ),
                 const SizedBox(height: AppSpacing.xxl),
-                
-                // Login Form Card
-                Container(
-                  padding: const EdgeInsets.all(AppSpacing.xl),
-                  decoration: BoxDecoration(
-                    color: AppColors.surface,
-                    borderRadius: AppRadius.borderLg,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.05),
-                        blurRadius: 10,
-                        offset: const Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Text(
-                        'Masuk',
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
-                      ),
-                      const SizedBox(height: AppSpacing.lg),
-                      
-                      if (_errorMessage != null) ...[
-                        Container(
-                          padding: const EdgeInsets.all(AppSpacing.sm),
-                          decoration: BoxDecoration(
-                            color: AppColors.statusRejected.withOpacity(0.1),
-                            borderRadius: AppRadius.borderSm,
-                            border: Border.all(color: AppColors.statusRejected),
-                          ),
-                          child: Text(
-                            _errorMessage!,
-                            style: const TextStyle(color: AppColors.statusRejected),
-                          ),
-                        ),
-                        const SizedBox(height: AppSpacing.md),
-                      ],
 
-                      AppTextField(
-                        label: 'Username',
-                        hint: 'Masukkan username',
-                        controller: _usernameController,
+                // Login Form (Modern Dark Flow)
+                Text(
+                  'Masuk',
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.textPrimary,
+                        fontSize: 28,
                       ),
-                      const SizedBox(height: AppSpacing.md),
-                      AppTextField(
-                        label: 'Password',
-                        hint: 'Masukkan password',
-                        controller: _passwordController,
-                        obscureText: true,
-                        maxLines: 1,
-                      ),
-                      const SizedBox(height: AppSpacing.xl),
-                      AppButton(
-                        text: 'Login',
-                        isLoading: _isLoading,
-                        onPressed: _handleLogin,
-                      ),
-                      const SizedBox(height: AppSpacing.md),
-                      
-                      // Petunjuk Master User
-                      Container(
-                        padding: const EdgeInsets.all(AppSpacing.md),
-                        decoration: BoxDecoration(
-                          color: AppColors.surfaceVariant,
-                          borderRadius: AppRadius.borderMd,
-                        ),
-                        child: const Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Mock Users:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
-                            Text('Petugas: petugas / 123', style: TextStyle(fontSize: 12)),
-                            Text('PIC: pic / 123', style: TextStyle(fontSize: 12)),
-                          ],
-                        ),
-                      )
+                ),
+                const SizedBox(height: AppSpacing.xs),
+                const Text(
+                  'Gunakan akun Petugas atau PIC untuk melanjutkan.',
+                  style: TextStyle(color: AppColors.textSecondary),
+                ),
+                const SizedBox(height: AppSpacing.xl),
+
+                if (_errorMessage != null) ...[
+                  Container(
+                    padding: const EdgeInsets.all(AppSpacing.md),
+                    decoration: BoxDecoration(
+                      color: AppColors.statusRejected.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(AppRadius.borderSm),
+                      border: Border.all(color: AppColors.statusRejected),
+                    ),
+                    child: Text(
+                      _errorMessage!,
+                      style: const TextStyle(color: AppColors.statusRejected, fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  const SizedBox(height: AppSpacing.md),
+                ],
+
+                AppTextField(
+                  label: 'Username',
+                  hint: 'Masukkan username',
+                  controller: _usernameController,
+                ),
+                const SizedBox(height: AppSpacing.md),
+                AppTextField(
+                  label: 'Password',
+                  hint: 'Masukkan password',
+                  controller: _passwordController,
+                  obscureText: true,
+                  maxLines: 1,
+                ),
+                const SizedBox(height: AppSpacing.xl),
+                AppButton(
+                  text: 'Login',
+                  isLoading: _isLoading,
+                  onPressed: _handleLogin,
+                ),
+                const SizedBox(height: AppSpacing.xxl),
+
+                // Petunjuk Master User (Border only style)
+                Container(
+                  padding: const EdgeInsets.all(AppSpacing.md),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: AppColors.surfaceVariant),
+                    borderRadius: BorderRadius.circular(AppRadius.borderMd),
+                  ),
+                  child: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('AKUN SIMULASI:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10, color: AppColors.primary, letterSpacing: 1.5)),
+                      SizedBox(height: 8),
+                      Text('Petugas: petugas / 123', style: TextStyle(fontSize: 13, color: AppColors.textPrimary)),
+                      Text('PIC: pic / 123', style: TextStyle(fontSize: 13, color: AppColors.textPrimary)),
                     ],
                   ),
-                ),
+                )
               ],
             ),
           ),

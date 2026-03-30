@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hugeicons/hugeicons.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/theme/app_colors.dart';
+import '../../../../app/theme/app_radius.dart';
 import '../../../../core/widgets/app_card.dart';
 import '../../../../app/router/route_names.dart';
 import '../providers/create_report_form_provider.dart';
@@ -12,6 +14,8 @@ class CreateReportRiskLevelScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final form = ref.watch(createReportFormProvider);
+
     void selectRisk(String riskName) {
       ref.read(createReportFormProvider.notifier).setRiskLevel(riskName);
       context.pushNamed(RouteNames.petugasCreateReportPhotos);
@@ -44,17 +48,37 @@ class CreateReportRiskLevelScreen extends ConsumerWidget {
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             const SizedBox(height: AppSpacing.xl),
-            
+
             Expanded(
               child: GridView.count(
                 crossAxisCount: 2,
                 crossAxisSpacing: AppSpacing.md,
                 mainAxisSpacing: AppSpacing.md,
                 children: [
-                  _buildRiskCard(context, 'Kritis (1)', AppColors.riskCritical, () => selectRisk('Kritis')),
-                  _buildRiskCard(context, 'Berat (2)', AppColors.riskHigh, () => selectRisk('Berat')),
-                  _buildRiskCard(context, 'Sedang (3)', AppColors.riskMedium, () => selectRisk('Sedang')),
-                  _buildRiskCard(context, 'Ringan (4)', AppColors.riskLow, () => selectRisk('Ringan')),
+                  _RiskCard(
+                    title: 'Kritis (1)',
+                    color: AppColors.riskCritical,
+                    isSelected: form.riskLevel == 'Kritis',
+                    onTap: () => selectRisk('Kritis'),
+                  ),
+                  _RiskCard(
+                    title: 'Berat (2)',
+                    color: AppColors.riskHigh,
+                    isSelected: form.riskLevel == 'Berat',
+                    onTap: () => selectRisk('Berat'),
+                  ),
+                  _RiskCard(
+                    title: 'Sedang (3)',
+                    color: AppColors.riskMedium,
+                    isSelected: form.riskLevel == 'Sedang',
+                    onTap: () => selectRisk('Sedang'),
+                  ),
+                  _RiskCard(
+                    title: 'Ringan (4)',
+                    color: AppColors.riskLow,
+                    isSelected: form.riskLevel == 'Ringan',
+                    onTap: () => selectRisk('Ringan'),
+                  ),
                 ],
               ),
             ),
@@ -63,26 +87,49 @@ class CreateReportRiskLevelScreen extends ConsumerWidget {
       ),
     );
   }
+}
 
-  Widget _buildRiskCard(BuildContext context, String title, Color color, VoidCallback onTap) {
-    return AppCard(
+class _RiskCard extends StatelessWidget {
+  final String title;
+  final Color color;
+  final bool isSelected;
+  final VoidCallback onTap;
+
+  const _RiskCard({
+    required this.title,
+    required this.color,
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
       onTap: onTap,
+      borderRadius: BorderRadius.circular(AppRadius.large),
       child: Container(
         decoration: BoxDecoration(
-          color: color.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: color, width: 2),
+          color: isSelected ? color : AppColors.surface,
+          borderRadius: BorderRadius.circular(AppRadius.large),
+          border: Border.all(
+            color: isSelected ? color : Colors.white.withOpacity(0.05),
+            width: 1,
+          ),
         ),
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.warning_amber_rounded, size: 48, color: color),
+              HugeIcon(
+                icon: HugeIcons.strokeRoundedDanger,
+                size: 48,
+                color: isSelected ? AppColors.textInverted : color,
+              ),
               const SizedBox(height: AppSpacing.sm),
               Text(
                 title,
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: color,
+                      color: isSelected ? AppColors.textInverted : color,
                       fontWeight: FontWeight.bold,
                     ),
               ),

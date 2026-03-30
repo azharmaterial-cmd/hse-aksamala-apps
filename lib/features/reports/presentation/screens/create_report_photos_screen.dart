@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
+import 'package:hugeicons/hugeicons.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../core/widgets/app_button.dart';
@@ -175,7 +176,11 @@ class _CreateReportPhotosScreenState extends ConsumerState<CreateReportPhotosScr
                   fit: BoxFit.cover,
                 ),
               )
-            : const Icon(Icons.add_a_photo, color: AppColors.textHint, size: 36),
+            : const HugeIcon(
+                icon: HugeIcons.strokeRoundedCameraAdd01,
+                color: AppColors.textHint,
+                size: 36,
+              ),
       ),
     );
   }

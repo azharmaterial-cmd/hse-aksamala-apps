@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 import '../../../../core/widgets/app_card.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
@@ -34,8 +35,8 @@ class AreaCard extends StatelessWidget {
                   color: AppColors.primaryLight.withOpacity(0.2),
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(
-                  Icons.business_outlined,
+                child: const HugeIcon(
+                  icon: HugeIcons.strokeRoundedBuilding01,
                   color: AppColors.primary,
                   size: 24,
                 ),

@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 class AppPhotoSlot extends StatelessWidget {
   final String title;
@@ -51,7 +52,11 @@ class AppPhotoSlot extends StatelessWidget {
                 Center(
                   child: ElevatedButton.icon(
                     onPressed: onTapCapture,
-                    icon: const Icon(Icons.camera_alt),
+                    icon: const HugeIcon(
+                      icon: HugeIcons.strokeRoundedCamera01,
+                      color: Colors.black87,
+                      size: 20,
+                    ),
                     label: const Text('Ambil Foto/Kamera'),
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.black87,
@@ -77,7 +82,11 @@ class AppPhotoSlot extends StatelessWidget {
                           radius: 18,
                           child: IconButton(
                             iconSize: 20,
-                            icon: const Icon(Icons.refresh, color: Colors.black87), 
+                            icon: const HugeIcon(
+                              icon: HugeIcons.strokeRoundedRefresh,
+                              color: Colors.black87,
+                              size: 20,
+                            ),
                             onPressed: onTapRetake
                           ),
                         ),
@@ -88,7 +97,11 @@ class AppPhotoSlot extends StatelessWidget {
                           radius: 18,
                           child: IconButton(
                             iconSize: 20,
-                            icon: const Icon(Icons.delete, color: Colors.red), 
+                            icon: const HugeIcon(
+                              icon: HugeIcons.strokeRoundedDelete02,
+                              color: Colors.red,
+                              size: 20,
+                            ),
                             onPressed: onTapRemove
                           ),
                         ),

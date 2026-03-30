@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 import '../../../../app/router/route_names.dart';
 import '../providers/auth_provider.dart';
@@ -42,7 +43,11 @@ class ProfilePage extends ConsumerWidget {
               size: GFSize.LARGE * 2,
               backgroundColor: GFColors.SUCCESS,
               shape: GFAvatarShape.circle,
-              child: Icon(Icons.person, size: 64, color: Colors.white),
+              child: HugeIcon(
+                icon: HugeIcons.strokeRoundedUser,
+                size: 64,
+                color: Colors.white,
+              ),
             ),
             const SizedBox(height: 24),
             const Text(
@@ -59,7 +64,11 @@ class ProfilePage extends ConsumerWidget {
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: GFButton(
                 onPressed: () => _logout(context, ref),
-                icon: const Icon(Icons.logout, color: Colors.white, size: 18),
+                icon: const HugeIcon(
+                  icon: HugeIcons.strokeRoundedLogout01,
+                  color: Colors.white,
+                  size: 18,
+                ),
                 text: 'KELUAR (LOGOUT)',
                 textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 color: GFColors.DANGER,

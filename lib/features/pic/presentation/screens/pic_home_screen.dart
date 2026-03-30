@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hugeicons/hugeicons.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../widgets/area_card.dart';
 import '../../../../core/mock_api/mock_database.dart';
 import '../providers/active_area_filter_provider.dart';
-import 'package:go_router/go_router.dart';
 
 class PicHomeScreen extends ConsumerWidget {
   const PicHomeScreen({super.key});
@@ -21,7 +22,11 @@ class PicHomeScreen extends ConsumerWidget {
         title: const Text('Home PIC'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.notifications_outlined),
+            icon: const HugeIcon(
+              icon: HugeIcons.strokeRoundedNotification01,
+              color: Colors.white,
+              size: 24,
+            ),
             onPressed: () {},
           )
         ],

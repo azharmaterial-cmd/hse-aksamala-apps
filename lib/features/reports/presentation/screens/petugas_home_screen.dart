@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hugeicons/hugeicons.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_radius.dart';
@@ -16,7 +17,11 @@ class PetugasHomeScreen extends StatelessWidget {
         title: const Text('Dashboard Petugas'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.notifications_outlined),
+            icon: const HugeIcon(
+              icon: HugeIcons.strokeRoundedNotification01,
+              color: Colors.white,
+              size: 24,
+            ),
             onPressed: () {},
           )
         ],
@@ -38,32 +43,28 @@ class PetugasHomeScreen extends StatelessWidget {
             const SizedBox(height: AppSpacing.xl),
             
             // Modern Create Report Button / Banner
-            AppCard(
+            InkWell(
               onTap: () {
                 context.pushNamed(RouteNames.petugasCreateReport);
               },
-              padding: const EdgeInsets.all(AppSpacing.lg),
+              borderRadius: BorderRadius.circular(AppRadius.large),
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: AppRadius.borderLg,
-                  gradient: const LinearGradient(
-                    colors: [AppColors.primary, AppColors.primaryDark],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
+                  color: AppColors.primary,
+                  borderRadius: BorderRadius.circular(AppRadius.large),
                 ),
-                padding: const EdgeInsets.all(AppSpacing.xl),
+                padding: const EdgeInsets.all(24.0),
                 child: Column(
                   children: [
                     Container(
                       padding: const EdgeInsets.all(AppSpacing.md),
-                      decoration: const BoxDecoration(
-                        color: Colors.white24,
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.1),
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(
-                        Icons.add_a_photo_outlined,
-                        color: AppColors.textInverse,
+                      child: const HugeIcon(
+                        icon: HugeIcons.strokeRoundedCameraAdd01,
+                        color: AppColors.textInverted,
                         size: 48,
                       ),
                     ),
@@ -71,7 +72,7 @@ class PetugasHomeScreen extends StatelessWidget {
                     Text(
                       'Buat Laporan Patroli',
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            color: AppColors.textInverse,
+                            color: AppColors.textInverted,
                             fontWeight: FontWeight.bold,
                           ),
                     ),
@@ -80,7 +81,7 @@ class PetugasHomeScreen extends StatelessWidget {
                       'Mulai inspeksi area dan laporkan temuan',
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.textInverse.withOpacity(0.9),
+                            color: AppColors.textInverted.withOpacity(0.8),
                           ),
                     ),
                   ],

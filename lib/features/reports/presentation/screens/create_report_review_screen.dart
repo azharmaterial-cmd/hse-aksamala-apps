@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:hugeicons/hugeicons.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../core/widgets/app_button.dart';
@@ -37,7 +38,11 @@ class _CreateReportReviewScreenState extends ConsumerState<CreateReportReviewScr
           actions: [
             AppButton(
               text: 'Bagikan via WhatsApp',
-              icon: const Icon(Icons.share, color: Colors.white),
+              icon: const HugeIcon(
+                icon: HugeIcons.strokeRoundedShare01,
+                color: Colors.white,
+                size: 20,
+              ),
               onPressed: () async {
                 final url = Uri.parse("whatsapp://send?text=Laporan Patroli Baru telah dibuat di aplikasi HSE Aksamala.");
                 if (await canLaunchUrl(url)) {

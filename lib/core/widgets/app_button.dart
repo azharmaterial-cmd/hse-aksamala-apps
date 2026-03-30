@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../app/theme/app_colors.dart';
 import '../../app/theme/app_spacing.dart';
+import '../../app/theme/app_radius.dart';
 
 enum AppButtonType { primary, secondary, outlined, text }
 
@@ -36,7 +37,7 @@ class AppButton extends StatelessWidget {
               strokeWidth: 2.5,
               color: type == AppButtonType.outlined || type == AppButtonType.text
                   ? AppColors.primary
-                  : AppColors.textInverse,
+                  : AppColors.textInverted,
             ),
           ),
           const SizedBox(width: AppSpacing.md),
@@ -52,6 +53,13 @@ class AppButton extends StatelessWidget {
     switch (type) {
       case AppButtonType.primary:
         button = ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppColors.primary,
+            foregroundColor: AppColors.textInverted,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppRadius.pill),
+            ),
+          ),
           onPressed: isLoading ? null : onPressed,
           child: buttonChild,
         );
@@ -60,7 +68,10 @@ class AppButton extends StatelessWidget {
         button = ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.secondary,
-            foregroundColor: AppColors.textInverse,
+            foregroundColor: AppColors.textInverted,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppRadius.pill),
+            ),
           ),
           onPressed: isLoading ? null : onPressed,
           child: buttonChild,
@@ -68,12 +79,22 @@ class AppButton extends StatelessWidget {
         break;
       case AppButtonType.outlined:
         button = OutlinedButton(
+          style: OutlinedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppRadius.pill),
+            ),
+          ),
           onPressed: isLoading ? null : onPressed,
           child: buttonChild,
         );
         break;
       case AppButtonType.text:
         button = TextButton(
+          style: TextButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppRadius.pill),
+            ),
+          ),
           onPressed: isLoading ? null : onPressed,
           child: buttonChild,
         );

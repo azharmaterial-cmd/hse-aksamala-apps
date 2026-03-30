@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 import '../../../../core/widgets/app_card.dart';
 import '../../../../core/widgets/status_badge.dart';
 import '../../../../app/theme/app_spacing.dart';
@@ -52,7 +53,11 @@ class ReportCard extends StatelessWidget {
             const SizedBox(height: AppSpacing.md),
             Row(
               children: [
-                const Icon(Icons.location_on_outlined, size: 16, color: AppColors.textHint),
+                const HugeIcon(
+                  icon: HugeIcons.strokeRoundedLocation01,
+                  size: 16,
+                  color: AppColors.textHint,
+                ),
                 const SizedBox(width: AppSpacing.xs),
                 Expanded(
                   child: Text(
@@ -62,7 +67,11 @@ class ReportCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                const Icon(Icons.calendar_today_outlined, size: 16, color: AppColors.textHint),
+                const HugeIcon(
+                  icon: HugeIcons.strokeRoundedCalendar01,
+                  size: 16,
+                  color: AppColors.textHint,
+                ),
                 const SizedBox(width: AppSpacing.xs),
                 Text(
                   date,

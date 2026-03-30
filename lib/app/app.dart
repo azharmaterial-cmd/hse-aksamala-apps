@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'router/app_router.dart';
 import 'theme/app_theme.dart';
 
 class HseAksamalaApp extends StatelessWidget {
@@ -8,11 +7,11 @@ class HseAksamalaApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
+    return MaterialApp(
       title: 'HSE Aksamala',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.light,
-      routerConfig: AppRouter.router,
+      theme: AppTheme.lightTheme,
+      home: const SizedBox.shrink(),
     );
   }
 }
