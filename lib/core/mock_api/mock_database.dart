@@ -42,6 +42,16 @@ class MockDatabase {
       'rootCause': 'Usia pakai lampu habis.',
       'date': DateTime.now().subtract(const Duration(days: 1)).toIso8601String(),
       'status': 'Approved',
+    }, 
+    {
+      'id': 'rpt_002',
+      'buildingType': 'Fasilitas Non-Produksi',
+      'area': 'Koridor Evakuasi Barat',
+      'riskLevel': 'Kritis',
+      'notes': 'Lampu neon kedap kedip.',
+      'rootCause': 'udah lama.',
+      'date': DateTime.now().subtract(const Duration(days: 1)).toIso8601String(),
+      'status': 'Approved',
     }
   ];
 

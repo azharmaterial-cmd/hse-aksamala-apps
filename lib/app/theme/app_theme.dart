@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'app_colors.dart';
 import 'app_radius.dart';
+import 'app_typography.dart';
 import 'app_text_styles.dart';
 
 class AppTheme {
@@ -23,7 +24,7 @@ class AppTheme {
       ),
       brightness: Brightness.dark,
       scaffoldBackgroundColor: AppColors.background,
-      fontFamily: 'Inter',
+      textTheme: AppTypography.textTheme,
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.background,
         elevation: 0,

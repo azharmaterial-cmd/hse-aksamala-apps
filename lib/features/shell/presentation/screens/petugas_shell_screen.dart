@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hugeicons/hugeicons.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import '../../../../app/router/route_names.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_radius.dart';
-import '../../../../app/theme/app_spacing.dart';
 
 class PetugasShellScreen extends StatelessWidget {
   final StatefulNavigationShell navigationShell;
@@ -25,44 +25,70 @@ class PetugasShellScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // Konten Utama
           Positioned.fill(
-            child: navigationShell,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 0), // Full extend ke bawah
+              child: navigationShell,
+            ),
           ),
 
-          // Floating Bottom Navigation
           Positioned(
-            bottom: 30,
-            left: 40,
-            right: 40,
-            child: Container(
-              height: 65,
-              decoration: BoxDecoration(
-                color: AppColors.surface,
-                borderRadius: BorderRadius.circular(AppRadius.pill),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            bottom: 24,
+            left: 102,
+            right: 102,
+            child: Material(
+              elevation: 8, // Elevation tinggi untuk memastikan di atas konten home screen
+              borderRadius: BorderRadius.circular(AppRadius.pill),
+              child: Container(
+                height: 62,
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                decoration: BoxDecoration(
+                  color: Colors.transparent, // Transparan agar homepage screen di belakang terlihat
+                  borderRadius: BorderRadius.circular(AppRadius.pill),
+                  border: Border.all(color: Colors.white.withValues(alpha: 0.06)),
+                ),
+                child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   _buildNavItem(
-                    icon: HugeIcons.strokeRoundedLicense,
-                    activeIcon: HugeIcons.strokeRoundedLicenseDraft,
-                    index: 0,
-                    label: 'Patroli',
-                  ),
-                  _buildNavItem(
-                    icon: HugeIcons.strokeRoundedHome01,
-                    activeIcon: HugeIcons.strokeRoundedHome02,
+                    iconPath: 'lib/assets/tasks.svg',
                     index: 1,
-                    label: 'Home',
                   ),
+                  const SizedBox(width: 12),
+                  GestureDetector(
+                    onTap: () => context.pushNamed(RouteNames.petugasCreateReport),
+                    child: Container(
+                      width: 46,
+                      height: 46,
+                      decoration: BoxDecoration(
+                        color: AppColors.secondary,
+                        borderRadius: BorderRadius.circular(AppRadius.pill),
+                        border: Border.all(
+                          color: AppColors.textInverted.withValues(alpha: 0.25),
+                          width: 1,
+                        ),
+                      ),
+                      child: Center(
+                        child: SvgPicture.asset(
+                          'lib/assets/add_bold.svg',
+                          width: 24,
+                          height: 24,
+                          fit: BoxFit.contain,
+                          colorFilter: const ColorFilter.mode(
+                            AppColors.textInverse,
+                            BlendMode.srcIn,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
                   _buildNavItem(
-                    icon: HugeIcons.strokeRoundedUser02,
-                    activeIcon: HugeIcons.strokeRoundedUser,
-                    index: 2,
-                    label: 'Profile',
+                    iconPath: 'lib/assets/calendar.svg',
+                    index: 0,
                   ),
                 ],
+              ),
               ),
             ),
           ),
@@ -72,37 +98,26 @@ class PetugasShellScreen extends StatelessWidget {
   }
 
   Widget _buildNavItem({
-    required IconData icon,
-    required IconData activeIcon,
+    required String iconPath,
     required int index,
-    required String label,
   }) {
     final isActive = navigationShell.currentIndex == index;
 
-    return Expanded(
-      child: InkWell(
-        onTap: () => _goBranch(index),
-        borderRadius: BorderRadius.circular(AppRadius.pill),
-        child: Container(
-          height: 65,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              HugeIcon(
-                icon: isActive ? activeIcon : icon,
-                color: isActive ? AppColors.primary : AppColors.textSecondary,
-                size: 24,
-              ),
-              const SizedBox(height: 4),
-              Text(
-                label,
-                style: TextStyle(
-                  color: isActive ? AppColors.primary : AppColors.textSecondary,
-                  fontSize: 12,
-                  fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
-                ),
-              ),
-            ],
+    return InkWell(
+      onTap: () => _goBranch(index),
+      borderRadius: BorderRadius.circular(AppRadius.pill),
+      child: SizedBox(
+        width: 50,
+        height: 54,
+        child: Center(
+          child: SvgPicture.asset(
+            iconPath,
+            width: isActive ? 32 : 32,
+            height: isActive ? 32 : 32,
+            colorFilter: ColorFilter.mode(
+              isActive ? AppColors.textPrimary : AppColors.textSecondary,
+              BlendMode.srcIn,
+            ),
           ),
         ),
       ),
